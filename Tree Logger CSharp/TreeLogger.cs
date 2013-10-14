@@ -25,54 +25,54 @@ namespace Tree_Logger_CSharp
 
         //Log Variables
         public double Logs = 0; //Amount of Logs
-        decimal LogsPerSecond = 0; //Amount of Logs you get per second
+        public decimal LogsPerSecond = 0; //Amount of Logs you get per second
         double ClickLogs = 1; //Amount of Logs you get per click
         double SelfClickedLogs = 0; //Amount of Logs you've clicked manually
         int TotalTimesClicked = 0; //Total times you've clicked
-        double DebugLPS = 0; //Debug LPS you've added
+        public double DebugLPS = 0; //Debug LPS you've added
 
         //Clicker Variables
-        int Clicker = 0;
+        public int Clicker = 0;
         double ClickerPrice = 15;
         double ClickerLPS = 0.1;
 
         //Lumberjack Variables
-        int Lumberjack = 0;
+        public int Lumberjack = 0;
         double LumberjackPrice = 100;
         double LumberjackLPS = 0.5;
 
         //Lumber Yard Variables
-        int LumberYard = 0;
+        public int LumberYard = 0;
         double LumberYardPrice = 500;
         double LumberYardLPS = 2;
 
         //Sawmill Variables
-        int Sawmill = 0;
+        public int Sawmill = 0;
         double SawmillPrice = 3000;
         double SawmillLPS = 10;
 
         //Forest Variables
-        int Forest = 0;
+        public int Forest = 0;
         double ForestPrice = 10000;
         double ForestLPS = 40;
 
         //Shipment Variables
-        int Shipment = 0;
+        public int Shipment = 0;
         double ShipmentPrice = 40000;
         double ShipmentLPS = 100;
 
         //Alchemy Lab Variables
-        int Alchemy = 0;
+        public int Alchemy = 0;
         double AlchemyPrice = 200000;
         double AlchemyLPS = 400;
 
         //Portal Variables
-        int Portal = 0;
+        public int Portal = 0;
         double PortalPrice = 1666666;
         double PortalLPS = 6666;
 
         //Extractor Variables
-        int Extractor = 0;
+        public int Extractor = 0;
         double ExtractorPrice = 123456789;
         double ExtractorLPS = 98765;
         #endregion
@@ -85,24 +85,8 @@ namespace Tree_Logger_CSharp
             //Center game to the screen
             CenterToScreen();
 
-            #region Load save
             // Load up save, if exists
-            this.Logs = Properties.Settings.Default.Logs;
-            this.LogsPerSecond = Properties.Settings.Default.LogsPerSecond;
-            this.ClickLogs = Properties.Settings.Default.ClickLogs;
-            this.SelfClickedLogs = Properties.Settings.Default.SelfClickedLogs;
-            this.TotalTimesClicked = Properties.Settings.Default.TotalTimesClicked;
-            this.Clicker = Properties.Settings.Default.Clicker;
-            this.Lumberjack = Properties.Settings.Default.Lumberjack;
-            this.LumberYard = Properties.Settings.Default.LumberYard;
-            this.Sawmill = Properties.Settings.Default.Sawmill;
-            this.Forest = Properties.Settings.Default.Forest;
-            this.Shipment = Properties.Settings.Default.Shipment;
-            this.Alchemy = Properties.Settings.Default.Alchemy;
-            this.Portal = Properties.Settings.Default.Portal;
-            this.Extractor = Properties.Settings.Default.Extractor;
-            #endregion
-
+            loadGame();
         }
 
         #region Tree Click button
@@ -436,45 +420,24 @@ namespace Tree_Logger_CSharp
         #region Form Closing
         private void TreeLogger_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-            
-
-
-            DialogResult QuitResult =
-           MessageBox.Show("Thanks for playing my game! Are you sure you wish to quit?",
+            DialogResult QuitResult = MessageBox.Show("Thanks for playing my game! Are you sure you wish to quit?",
                "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question); //Sets quit messagebox text
+
+            if (QuitResult == DialogResult.No)
+            {
+                e.Cancel = true;
+                return;
+            }
 
             DialogResult SaveResult =
                 MessageBox.Show("Do you wish to save your game?",
                 "Save?", MessageBoxButtons.YesNo, MessageBoxIcon.Question); //Sets save messagebox text
 
-            if (QuitResult == DialogResult.No) /*Check if the result is true or */  { e.Cancel = true; }
-            else if (DialogResult == DialogResult.Yes)                              //Cancels the shutdown
+
+            if (SaveResult == DialogResult.Yes)
             {
-
-                if (SaveResult == DialogResult.Yes)
-                {
-                    //Save the game and exits the whole application
-                    Properties.Settings.Default.Logs = this.Logs;
-                    Properties.Settings.Default.LogsPerSecond = this.LogsPerSecond;
-                    Properties.Settings.Default.ClickLogs = this.ClickLogs;
-                    Properties.Settings.Default.SelfClickedLogs = this.SelfClickedLogs;
-                    Properties.Settings.Default.TotalTimesClicked = this.TotalTimesClicked;
-                    Properties.Settings.Default.Clicker = this.Clicker;
-                    Properties.Settings.Default.Lumberjack = this.Lumberjack;
-                    Properties.Settings.Default.LumberYard = this.LumberYard;
-                    Properties.Settings.Default.Sawmill = this.Sawmill;
-                    Properties.Settings.Default.Forest = this.Forest;
-                    Properties.Settings.Default.Shipment = this.Shipment;
-                    Properties.Settings.Default.Alchemy = this.Alchemy;
-                    Properties.Settings.Default.Portal = this.Portal;
-                    Properties.Settings.Default.Extractor = this.Extractor;
-                    Properties.Settings.Default.Save();
-                    Application.Exit();
-                }
+                saveGame();
             }
-            
-
         }
 
         private void TreeLogger_FormClosed(object sender, FormClosedEventArgs e)
@@ -504,7 +467,7 @@ namespace Tree_Logger_CSharp
         {
             if (e.Control && e.Shift && e.KeyCode == Keys.S)
             {
-                DebugScreen showDebugScreen = new DebugScreen(); //Create a new instance of the debug screen
+                DebugScreen showDebugScreen = new DebugScreen(this); //Create a new instance of the debug screen
                 showDebugScreen.Show(); //Show the debug screen
             }
         }
@@ -519,21 +482,7 @@ namespace Tree_Logger_CSharp
             else
             {
                 //Save to application settings
-                Properties.Settings.Default.Logs = this.Logs;
-                Properties.Settings.Default.LogsPerSecond = this.LogsPerSecond;
-                Properties.Settings.Default.ClickLogs = this.ClickLogs;
-                Properties.Settings.Default.SelfClickedLogs = this.SelfClickedLogs;
-                Properties.Settings.Default.TotalTimesClicked = this.TotalTimesClicked;
-                Properties.Settings.Default.Clicker = this.Clicker;
-                Properties.Settings.Default.Lumberjack = this.Lumberjack;
-                Properties.Settings.Default.LumberYard = this.LumberYard;
-                Properties.Settings.Default.Sawmill = this.Sawmill;
-                Properties.Settings.Default.Forest = this.Forest;
-                Properties.Settings.Default.Shipment = this.Shipment;
-                Properties.Settings.Default.Alchemy = this.Alchemy;
-                Properties.Settings.Default.Portal = this.Portal;
-                Properties.Settings.Default.Extractor = this.Extractor;
-                Properties.Settings.Default.Save();
+                saveGame();
                 lblSaved.Visible = true;
                 AutoSaveTime = 60;
             }
@@ -583,20 +532,7 @@ namespace Tree_Logger_CSharp
                 Properties.Settings.Default.Save();
 
                 //Reload save
-                this.Logs = Properties.Settings.Default.Logs;
-                this.LogsPerSecond = Properties.Settings.Default.LogsPerSecond;
-                this.ClickLogs = Properties.Settings.Default.ClickLogs;
-                this.SelfClickedLogs = Properties.Settings.Default.SelfClickedLogs;
-                this.TotalTimesClicked = Properties.Settings.Default.TotalTimesClicked;
-                this.Clicker = Properties.Settings.Default.Clicker;
-                this.Lumberjack = Properties.Settings.Default.Lumberjack;
-                this.LumberYard = Properties.Settings.Default.LumberYard;
-                this.Sawmill = Properties.Settings.Default.Sawmill;
-                this.Forest = Properties.Settings.Default.Forest;
-                this.Shipment = Properties.Settings.Default.Shipment;
-                this.Alchemy = Properties.Settings.Default.Alchemy;
-                this.Portal = Properties.Settings.Default.Portal;
-                this.Extractor = Properties.Settings.Default.Extractor;
+                loadGame();
             }
         }
         #endregion
@@ -604,7 +540,14 @@ namespace Tree_Logger_CSharp
         #region Manual Save
         private void btnManualSave_Click(object sender, EventArgs e)
         {
-            //Save to application settings
+            saveGame();
+            MessageBox.Show("Saved!", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+        #endregion
+
+        #region Save Game Function
+        public void saveGame()
+        {
             Properties.Settings.Default.Logs = this.Logs;
             Properties.Settings.Default.LogsPerSecond = this.LogsPerSecond;
             Properties.Settings.Default.ClickLogs = this.ClickLogs;
@@ -620,7 +563,26 @@ namespace Tree_Logger_CSharp
             Properties.Settings.Default.Portal = this.Portal;
             Properties.Settings.Default.Extractor = this.Extractor;
             Properties.Settings.Default.Save();
-            MessageBox.Show("Saved!", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+        #endregion
+
+        #region Load Game Function
+        public void loadGame()
+        {
+            this.Logs = Properties.Settings.Default.Logs;
+            this.LogsPerSecond = Properties.Settings.Default.LogsPerSecond;
+            this.ClickLogs = Properties.Settings.Default.ClickLogs;
+            this.SelfClickedLogs = Properties.Settings.Default.SelfClickedLogs;
+            this.TotalTimesClicked = Properties.Settings.Default.TotalTimesClicked;
+            this.Clicker = Properties.Settings.Default.Clicker;
+            this.Lumberjack = Properties.Settings.Default.Lumberjack;
+            this.LumberYard = Properties.Settings.Default.LumberYard;
+            this.Sawmill = Properties.Settings.Default.Sawmill;
+            this.Forest = Properties.Settings.Default.Forest;
+            this.Shipment = Properties.Settings.Default.Shipment;
+            this.Alchemy = Properties.Settings.Default.Alchemy;
+            this.Portal = Properties.Settings.Default.Portal;
+            this.Extractor = Properties.Settings.Default.Extractor;
         }
         #endregion
     }
