@@ -18,7 +18,7 @@ namespace Tree_Logger_CSharp
         public DebugScreen(TreeLogger gameForm)
         {
             _game = gameForm;
-            InitializeComponent(); //WIP
+            InitializeComponent();
         }
 
         private void DebugScreen_Load(object sender, EventArgs e)
@@ -78,6 +78,11 @@ namespace Tree_Logger_CSharp
         private void btnAddExtractor_Click(object sender, EventArgs e)
         {
             _game.Extractor += Convert.ToInt32(this.txtAddExtractor.Value);
+        }
+
+        private void btnAddCondenser_Click(object sender, EventArgs e)
+        {
+            _game.Condenser += Convert.ToInt32(this.txtAddCondenser.Value);
         }
     }
 }

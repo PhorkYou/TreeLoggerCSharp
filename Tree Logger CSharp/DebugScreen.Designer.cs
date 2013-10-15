@@ -50,6 +50,8 @@
             this.txtAddAlchemyLab = new System.Windows.Forms.NumericUpDown();
             this.txtAddPortal = new System.Windows.Forms.NumericUpDown();
             this.txtAddExtractor = new System.Windows.Forms.NumericUpDown();
+            this.txtAddCondenser = new System.Windows.Forms.NumericUpDown();
+            this.btnAddCondenser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddLPS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddClicker)).BeginInit();
@@ -61,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAddAlchemyLab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddPortal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddExtractor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddCondenser)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAddLogs
@@ -155,7 +158,7 @@
             // 
             // btnAddPortal
             // 
-            this.btnAddPortal.Location = new System.Drawing.Point(111, 243);
+            this.btnAddPortal.Location = new System.Drawing.Point(111, 241);
             this.btnAddPortal.Name = "btnAddPortal";
             this.btnAddPortal.Size = new System.Drawing.Size(85, 23);
             this.btnAddPortal.TabIndex = 18;
@@ -165,7 +168,7 @@
             // 
             // btnAddExtractor
             // 
-            this.btnAddExtractor.Location = new System.Drawing.Point(111, 267);
+            this.btnAddExtractor.Location = new System.Drawing.Point(111, 265);
             this.btnAddExtractor.Name = "btnAddExtractor";
             this.btnAddExtractor.Size = new System.Drawing.Size(85, 23);
             this.btnAddExtractor.TabIndex = 20;
@@ -305,11 +308,35 @@
             this.txtAddExtractor.Size = new System.Drawing.Size(100, 20);
             this.txtAddExtractor.TabIndex = 32;
             // 
+            // txtAddCondenser
+            // 
+            this.txtAddCondenser.Location = new System.Drawing.Point(5, 292);
+            this.txtAddCondenser.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.txtAddCondenser.Name = "txtAddCondenser";
+            this.txtAddCondenser.Size = new System.Drawing.Size(100, 20);
+            this.txtAddCondenser.TabIndex = 33;
+            // 
+            // btnAddCondenser
+            // 
+            this.btnAddCondenser.Location = new System.Drawing.Point(111, 289);
+            this.btnAddCondenser.Name = "btnAddCondenser";
+            this.btnAddCondenser.Size = new System.Drawing.Size(85, 23);
+            this.btnAddCondenser.TabIndex = 34;
+            this.btnAddCondenser.Text = "+ Condenser";
+            this.btnAddCondenser.UseVisualStyleBackColor = true;
+            this.btnAddCondenser.Click += new System.EventHandler(this.btnAddCondenser_Click);
+            // 
             // DebugScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(204, 292);
+            this.ClientSize = new System.Drawing.Size(204, 313);
+            this.Controls.Add(this.btnAddCondenser);
+            this.Controls.Add(this.txtAddCondenser);
             this.Controls.Add(this.txtAddExtractor);
             this.Controls.Add(this.txtAddPortal);
             this.Controls.Add(this.txtAddAlchemyLab);
@@ -349,6 +376,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAddAlchemyLab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddPortal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddExtractor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddCondenser)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -377,5 +405,7 @@
         private System.Windows.Forms.NumericUpDown txtAddAlchemyLab;
         private System.Windows.Forms.NumericUpDown txtAddPortal;
         private System.Windows.Forms.NumericUpDown txtAddExtractor;
+        private System.Windows.Forms.NumericUpDown txtAddCondenser;
+        private System.Windows.Forms.Button btnAddCondenser;
     }
 }

@@ -44,7 +44,7 @@ namespace Tree_Logger_CSharp
         //Lumber Yard Variables
         public int LumberYard = 0;
         double LumberYardPrice = 500;
-        double LumberYardLPS = 2;
+        double LumberYardLPS = 5;
 
         //Sawmill Variables
         public int Sawmill = 0;
@@ -75,10 +75,15 @@ namespace Tree_Logger_CSharp
         public int Extractor = 0;
         double ExtractorPrice = 123456789;
         double ExtractorLPS = 98765;
+
+        //Condenser Variables
+        public int Condenser = 0;
+        double CondenserPrice = 3999999999;
+        double CondenserLPS = 999999;
         #endregion
 
+        #region Form Initialization
         public TreeLogger()
-
         {
             InitializeComponent();          
 
@@ -88,6 +93,7 @@ namespace Tree_Logger_CSharp
             // Load up save, if exists
             loadGame();
         }
+        #endregion
 
         #region Tree Click button
         private void btnTree_Click(object sender, EventArgs e)
@@ -103,7 +109,7 @@ namespace Tree_Logger_CSharp
         #region All the label refreshing and LPS events
         private void tmrLPS_Tick(object sender, EventArgs e)
         {
-
+            
             //Add all *LPS variables to LogsPerSecond
             LogsPerSecond = TotalLPS();
 
@@ -114,7 +120,7 @@ namespace Tree_Logger_CSharp
             //Refresh Logs and LPS
             lblLogsInfo.Text = String.Format("Logs: {0:n0}\nLPS: {1:#,###,##0.#}\nClicked: {2}",
                 Logs, LogsPerSecond, SelfClickedLogs); //Display how many logs you have, how many you get
-            //per second and total manually clicked
+                                                     //per second and total manually clicked
 
             //Refresh form caption to display how many logs
             Text = String.Format("{0:n0}", Logs) + " Logs";
@@ -208,6 +214,16 @@ namespace Tree_Logger_CSharp
             //Refresh ExtractorInfo to see how many owned and the price
             lblExtractorInfo.Text = string.Format("Extractors owned: {0:n0}\nExtractor price: {1:n0}",
                 Extractor, ExtractorPrice);
+
+            //Refresh BuyCondenser button to see if it matches the price
+            btnBuyCondenser.Enabled = (Math.Round(Logs) >= CondenserPrice);
+
+            //Refresh SellCondenser button to see if you have any Condenser Labs
+            btnSellCondenser.Enabled = Condenser != 0;
+
+            //Refresh CondenserInfo to see how many owned and the price
+            lblCondenserInfo.Text = string.Format("Condensers owned: {0:n0}\nCondenser price: {1:n0}",
+                Condenser, CondenserPrice);
         }
         #endregion
 
@@ -215,9 +231,10 @@ namespace Tree_Logger_CSharp
         private decimal TotalLPS()
         {
 
-            return Convert.ToDecimal((Clicker * ClickerLPS) + (Lumberjack * LumberjackLPS) + (LumberYard * LumberYardLPS) +
-                (Sawmill * SawmillLPS) + (Forest * ForestLPS) + (Shipment * ShipmentLPS) +
-                (Alchemy * AlchemyLPS) + (Portal * PortalLPS) + (Extractor * ExtractorLPS) + (DebugLPS));
+           return Convert.ToDecimal((Clicker * ClickerLPS) + (Lumberjack * LumberjackLPS) + (LumberYard * LumberYardLPS) +
+               (Sawmill * SawmillLPS) + (Forest * ForestLPS) + (Shipment * ShipmentLPS) +
+               (Alchemy * AlchemyLPS) + (Portal * PortalLPS) + (Extractor * ExtractorLPS) + (Condenser * CondenserLPS) + 
+               (DebugLPS));
 
         }
         #endregion
@@ -263,7 +280,6 @@ namespace Tree_Logger_CSharp
             LumberjackPrice = Math.Round(LumberjackPrice); //Round LumberjackPrice up
             Logs = Math.Floor(Logs); //Round number to prevent buy/sell abuse
             lblLogsInfo.Focus();   //Focus label to prevent holding enter/return abuse
-
         }
 
         private void btnBuyLumberYard_Click(object sender, EventArgs e)
@@ -286,7 +302,7 @@ namespace Tree_Logger_CSharp
             Logs = Math.Floor(Logs); //Round number to prevent buy/sell abuse
             lblLogsInfo.Focus();   //Focus label to prevent holding enter/return abuse
         }
-
+        
         private void btnBuySawmill_Click(object sender, EventArgs e)
         {
             Sawmill++;  //Add a Sawmill
@@ -415,6 +431,28 @@ namespace Tree_Logger_CSharp
             Logs = Math.Floor(Logs); //Round number to prevent buy/sell abuse
             lblLogsInfo.Focus();   //Focus label to prevent holding enter/return abuse
         }
+
+        private void btnBuyCondenser_Click(object sender, EventArgs e)
+        {
+            Condenser++;  //Add a Condenser
+            Logs -= CondenserPrice;   //Take away logs equal to the Condensers price
+            CondenserPrice *= 1.15;   //Increase the CondenserPrice by 15%
+            CondenserPrice = Math.Round(CondenserPrice);   //Round to prevent buy/sell abuse
+            Logs = Math.Round(Logs);    //Round to prevent buy/sell abuse
+            lblLogsInfo.Focus();   //Focus label to prevent holding enter/return abuse
+        }
+
+        private void btnSellCondenser_Click(object sender, EventArgs e)
+        {
+            Condenser--; //Remove a Condenser
+            Logs = Math.Floor(Logs); //Round number to prevent buy/sell abuse
+            Logs += CondenserPrice / 1.95; //Add back half logs from previous CondenserPrice
+            CondenserPrice /= 1.15; //Return CondenserPrice back to previous price
+            CondenserPrice = Math.Round(CondenserPrice); //Round CondenserPrice up
+            Logs = Math.Floor(Logs); //Round number to prevent buy/sell abuse
+            lblLogsInfo.Focus();   //Focus label to prevent holding enter/return abuse
+        }
+
         #endregion
 
         #region Form Closing
@@ -449,7 +487,7 @@ namespace Tree_Logger_CSharp
         #region Buy building button
         private void btnBuyBuildings_Click(object sender, EventArgs e)
         {
-            if (!CheckBuyBuildings)
+            if (!CheckBuyBuildings) 
             {
                 Size = new Size(492, 261);
                 CheckBuyBuildings = true;
@@ -535,9 +573,7 @@ namespace Tree_Logger_CSharp
         #region Save Game Function
         public void saveGame()
         {
-
             //Saves the games state to the application settings
-
             Properties.Settings.Default.Logs = this.Logs;
             Properties.Settings.Default.LogsPerSecond = this.LogsPerSecond;
             Properties.Settings.Default.ClickLogs = this.ClickLogs;
@@ -552,6 +588,7 @@ namespace Tree_Logger_CSharp
             Properties.Settings.Default.Alchemy = this.Alchemy;
             Properties.Settings.Default.Portal = this.Portal;
             Properties.Settings.Default.Extractor = this.Extractor;
+            Properties.Settings.Default.Condenser = this.Condenser;
             Properties.Settings.Default.ClickerPrice = this.ClickerPrice;
             Properties.Settings.Default.LumberjackPrice = this.LumberjackPrice;
             Properties.Settings.Default.LumberYardPrice = this.LumberYardPrice;
@@ -561,6 +598,7 @@ namespace Tree_Logger_CSharp
             Properties.Settings.Default.AlchemyPrice = this.AlchemyPrice;
             Properties.Settings.Default.PortalPrice = this.PortalPrice;
             Properties.Settings.Default.ExtractorPrice = this.ExtractorPrice;
+            Properties.Settings.Default.CondenserPrice = this.CondenserPrice;
             Properties.Settings.Default.Save();
         }
         #endregion
@@ -583,6 +621,7 @@ namespace Tree_Logger_CSharp
             this.Alchemy = Properties.Settings.Default.Alchemy;
             this.Portal = Properties.Settings.Default.Portal;
             this.Extractor = Properties.Settings.Default.Extractor;
+            this.Condenser = Properties.Settings.Default.Condenser;
             this.ClickerPrice = Properties.Settings.Default.ClickerPrice;
             this.LumberjackPrice = Properties.Settings.Default.LumberjackPrice;
             this.LumberYardPrice = Properties.Settings.Default.LumberYardPrice;
@@ -592,39 +631,42 @@ namespace Tree_Logger_CSharp
             this.AlchemyPrice = Properties.Settings.Default.AlchemyPrice;
             this.PortalPrice = Properties.Settings.Default.PortalPrice;
             this.ExtractorPrice = Properties.Settings.Default.ExtractorPrice;
+            this.CondenserPrice = Properties.Settings.Default.CondenserPrice;
         }
         #endregion
 
         #region Reset Game Function
         public void resetGame()
         {
-            //Resets the games save and state to the default
-            Properties.Settings.Default.Logs = 0;
-            Properties.Settings.Default.LogsPerSecond = 0;
-            Properties.Settings.Default.ClickLogs = 1;
-            Properties.Settings.Default.SelfClickedLogs = 0;
-            Properties.Settings.Default.TotalTimesClicked = 0;
-            Properties.Settings.Default.Clicker = 0;
-            Properties.Settings.Default.Lumberjack = 0;
-            Properties.Settings.Default.LumberYard = 0;
-            Properties.Settings.Default.Sawmill = 0;
-            Properties.Settings.Default.Forest = 0;
-            Properties.Settings.Default.Shipment = 0;
-            Properties.Settings.Default.Alchemy = 0;
-            Properties.Settings.Default.Portal = 0;
-            Properties.Settings.Default.Extractor = 0;
-            Properties.Settings.Default.ClickerPrice = 15;
-            Properties.Settings.Default.LumberjackPrice = 100;
-            Properties.Settings.Default.LumberYardPrice = 500;
-            Properties.Settings.Default.SawmillPrice = 3000;
-            Properties.Settings.Default.ForestPrice = 10000;
-            Properties.Settings.Default.ShipmentPrice = 40000;
-            Properties.Settings.Default.AlchemyPrice = 200000;
-            Properties.Settings.Default.PortalPrice = 1666666;
-            Properties.Settings.Default.ExtractorPrice = 123456789;
-            Properties.Settings.Default.Save();
+                //Resets the games save and state to the default
+                Properties.Settings.Default.Logs = 0;
+                Properties.Settings.Default.LogsPerSecond = 0;
+                Properties.Settings.Default.ClickLogs = 1;
+                Properties.Settings.Default.SelfClickedLogs = 0;
+                Properties.Settings.Default.TotalTimesClicked = 0;
+                Properties.Settings.Default.Clicker = 0;
+                Properties.Settings.Default.Lumberjack = 0;
+                Properties.Settings.Default.LumberYard = 0;
+                Properties.Settings.Default.Sawmill = 0;
+                Properties.Settings.Default.Forest = 0;
+                Properties.Settings.Default.Shipment = 0;
+                Properties.Settings.Default.Alchemy = 0;
+                Properties.Settings.Default.Portal = 0;
+                Properties.Settings.Default.Extractor = 0;
+                Properties.Settings.Default.Condenser = 0;
+                Properties.Settings.Default.ClickerPrice = 15;
+                Properties.Settings.Default.LumberjackPrice = 100;
+                Properties.Settings.Default.LumberYardPrice = 500;
+                Properties.Settings.Default.SawmillPrice = 3000;
+                Properties.Settings.Default.ForestPrice = 10000;
+                Properties.Settings.Default.ShipmentPrice = 40000;
+                Properties.Settings.Default.AlchemyPrice = 200000;
+                Properties.Settings.Default.PortalPrice = 1666666;
+                Properties.Settings.Default.ExtractorPrice = 123456789;
+                Properties.Settings.Default.CondenserPrice = 3999999999;
+                Properties.Settings.Default.Save();
         }
-        #endregion
+#endregion
 
     }
 }

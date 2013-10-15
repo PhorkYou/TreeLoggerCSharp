@@ -42,24 +42,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tree Logger CSharp.exe" size="37888">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tree Logger CSharp.exe" size="42496">
       <assemblyIdentity name="Tree Logger CSharp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>aVMqMm+/p/MV2HzV8R5W189xd2ron1vj2e1S28qd/F4=</dsig:DigestValue>
+        <dsig:DigestValue>XAb8NHlvIUKluKh4PwQSafw+roymhygz3vN4SLptWW8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Tree Logger CSharp.exe.config" size="2715">
+  <file name="Tree Logger CSharp.exe.config" size="4283">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>euE86I71UV2Vfq/vDP0Wk7uWt1nbDLzFQR4bfzPcBdQ=</dsig:DigestValue>
+      <dsig:DigestValue>ahb7ExUTk14FysiGc7jieuH+2E4V1ncvYJLzoOTjUXM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

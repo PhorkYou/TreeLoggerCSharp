@@ -298,5 +298,29 @@ namespace Tree_Logger_CSharp.Properties {
                 this["ExtractorPrice"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3999999999")]
+        public double CondenserPrice {
+            get {
+                return ((double)(this["CondenserPrice"]));
+            }
+            set {
+                this["CondenserPrice"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Condenser {
+            get {
+                return ((int)(this["Condenser"]));
+            }
+            set {
+                this["Condenser"] = value;
+            }
+        }
     }
 }

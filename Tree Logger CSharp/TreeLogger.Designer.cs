@@ -67,6 +67,9 @@
             this.pOptionsPanel = new System.Windows.Forms.Panel();
             this.btnManualSave = new System.Windows.Forms.Button();
             this.btnResetSave = new System.Windows.Forms.Button();
+            this.btnBuyCondenser = new System.Windows.Forms.Button();
+            this.btnSellCondenser = new System.Windows.Forms.Button();
+            this.lblCondenserInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.pOptionsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -425,8 +428,11 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.lblCondenserInfo);
             this.panel1.Controls.Add(this.lblClickerInfo);
+            this.panel1.Controls.Add(this.btnSellCondenser);
             this.panel1.Controls.Add(this.btnBuyClicker);
+            this.panel1.Controls.Add(this.btnBuyCondenser);
             this.panel1.Controls.Add(this.btnSellForest);
             this.panel1.Controls.Add(this.lblExtractorInfo);
             this.panel1.Controls.Add(this.btnBuyForest);
@@ -503,9 +509,9 @@
             // 
             this.pOptionsPanel.Controls.Add(this.btnManualSave);
             this.pOptionsPanel.Controls.Add(this.btnResetSave);
-            this.pOptionsPanel.Location = new System.Drawing.Point(2, 159);
+            this.pOptionsPanel.Location = new System.Drawing.Point(2, 155);
             this.pOptionsPanel.Name = "pOptionsPanel";
-            this.pOptionsPanel.Size = new System.Drawing.Size(79, 48);
+            this.pOptionsPanel.Size = new System.Drawing.Size(77, 48);
             this.pOptionsPanel.TabIndex = 40;
             this.pOptionsPanel.Visible = false;
             // 
@@ -528,6 +534,41 @@
             this.btnResetSave.Text = "Reset Save";
             this.btnResetSave.UseVisualStyleBackColor = true;
             this.btnResetSave.Click += new System.EventHandler(this.btnResetSave_Click);
+            // 
+            // btnBuyCondenser
+            // 
+            this.btnBuyCondenser.BackColor = System.Drawing.Color.BurlyWood;
+            this.btnBuyCondenser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuyCondenser.Location = new System.Drawing.Point(3, 496);
+            this.btnBuyCondenser.Name = "btnBuyCondenser";
+            this.btnBuyCondenser.Size = new System.Drawing.Size(99, 23);
+            this.btnBuyCondenser.TabIndex = 41;
+            this.btnBuyCondenser.TabStop = false;
+            this.btnBuyCondenser.Text = "Buy Condenser";
+            this.btnBuyCondenser.UseVisualStyleBackColor = false;
+            this.btnBuyCondenser.Click += new System.EventHandler(this.btnBuyCondenser_Click);
+            // 
+            // btnSellCondenser
+            // 
+            this.btnSellCondenser.BackColor = System.Drawing.Color.BurlyWood;
+            this.btnSellCondenser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSellCondenser.Location = new System.Drawing.Point(101, 496);
+            this.btnSellCondenser.Name = "btnSellCondenser";
+            this.btnSellCondenser.Size = new System.Drawing.Size(99, 23);
+            this.btnSellCondenser.TabIndex = 42;
+            this.btnSellCondenser.TabStop = false;
+            this.btnSellCondenser.Text = "Sell Condenser";
+            this.btnSellCondenser.UseVisualStyleBackColor = false;
+            this.btnSellCondenser.Click += new System.EventHandler(this.btnSellCondenser_Click);
+            // 
+            // lblCondenserInfo
+            // 
+            this.lblCondenserInfo.AutoSize = true;
+            this.lblCondenserInfo.Location = new System.Drawing.Point(0, 522);
+            this.lblCondenserInfo.Name = "lblCondenserInfo";
+            this.lblCondenserInfo.Size = new System.Drawing.Size(26, 26);
+            this.lblCondenserInfo.TabIndex = 43;
+            this.lblCondenserInfo.Text = "Res\r\nRes";
             // 
             // TreeLogger
             // 
@@ -598,6 +639,9 @@
         private System.Windows.Forms.Panel pOptionsPanel;
         private System.Windows.Forms.Button btnManualSave;
         private System.Windows.Forms.Button btnResetSave;
+        private System.Windows.Forms.Label lblCondenserInfo;
+        private System.Windows.Forms.Button btnSellCondenser;
+        private System.Windows.Forms.Button btnBuyCondenser;
     }
 }
 

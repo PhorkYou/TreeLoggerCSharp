@@ -71,5 +71,11 @@
     <Setting Name="ExtractorPrice" Type="System.Double" Scope="User">
       <Value Profile="(Default)">123456789</Value>
     </Setting>
+    <Setting Name="CondenserPrice" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">3999999999</Value>
+    </Setting>
+    <Setting Name="Condenser" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

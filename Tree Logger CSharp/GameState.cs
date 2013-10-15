@@ -34,7 +34,7 @@ namespace Tree_Logger_CSharp
         //Lumber Yard Variables
         public int LumberYard = 0;
         double LumberYardPrice = 500;
-        double LumberYardLPS = 2;
+        double LumberYardLPS = 5;
 
         //Sawmill Variables
         public int Sawmill = 0;
@@ -65,5 +65,10 @@ namespace Tree_Logger_CSharp
         public int Extractor = 0;
         double ExtractorPrice = 123456789;
         double ExtractorLPS = 98765;
+
+        //Condenser Variables
+        public int Condenser = 0;
+        double CondenserPrice = 3999999999;
+        double CondenserLPS = 999999;
     }
 }
