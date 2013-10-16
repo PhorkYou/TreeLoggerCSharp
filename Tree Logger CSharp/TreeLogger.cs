@@ -92,8 +92,33 @@ namespace Tree_Logger_CSharp
 
             // Load up save, if exists
             loadGame();
+            recalculateAll();
         }
         #endregion
+
+        public double recalculateCosts(double BasePrice, int Number)
+        {
+            for (int i = 0; i < Number; i++)
+            {
+                BasePrice *= 1.15;
+            }
+
+            return BasePrice;
+        }
+
+        public void recalculateAll()
+        {
+            ClickerPrice = recalculateCosts(ClickerPrice, Clicker);
+            LumberjackPrice = recalculateCosts(LumberjackPrice, Lumberjack);
+            LumberYardPrice = recalculateCosts(LumberYardPrice, LumberYard);
+            SawmillPrice = recalculateCosts(SawmillPrice, Sawmill);
+            ForestPrice = recalculateCosts(ForestPrice, Forest);
+            ShipmentPrice = recalculateCosts(ShipmentPrice, Shipment);
+            AlchemyPrice = recalculateCosts(AlchemyPrice, Alchemy);
+            PortalPrice = recalculateCosts(PortalPrice, Portal);
+            ExtractorPrice = recalculateCosts(ExtractorPrice, Extractor);
+            CondenserPrice = recalculateCosts(CondenserPrice, Condenser);
+        }
 
         #region Tree Click button
         private void btnTree_Click(object sender, EventArgs e)
@@ -589,16 +614,6 @@ namespace Tree_Logger_CSharp
             Properties.Settings.Default.Portal = this.Portal;
             Properties.Settings.Default.Extractor = this.Extractor;
             Properties.Settings.Default.Condenser = this.Condenser;
-            Properties.Settings.Default.ClickerPrice = this.ClickerPrice;
-            Properties.Settings.Default.LumberjackPrice = this.LumberjackPrice;
-            Properties.Settings.Default.LumberYardPrice = this.LumberYardPrice;
-            Properties.Settings.Default.SawmillPrice = this.SawmillPrice;
-            Properties.Settings.Default.ForestPrice = this.ForestPrice;
-            Properties.Settings.Default.ShipmentPrice = this.ShipmentPrice;
-            Properties.Settings.Default.AlchemyPrice = this.AlchemyPrice;
-            Properties.Settings.Default.PortalPrice = this.PortalPrice;
-            Properties.Settings.Default.ExtractorPrice = this.ExtractorPrice;
-            Properties.Settings.Default.CondenserPrice = this.CondenserPrice;
             Properties.Settings.Default.Save();
         }
         #endregion
@@ -622,16 +637,6 @@ namespace Tree_Logger_CSharp
             this.Portal = Properties.Settings.Default.Portal;
             this.Extractor = Properties.Settings.Default.Extractor;
             this.Condenser = Properties.Settings.Default.Condenser;
-            this.ClickerPrice = Properties.Settings.Default.ClickerPrice;
-            this.LumberjackPrice = Properties.Settings.Default.LumberjackPrice;
-            this.LumberYardPrice = Properties.Settings.Default.LumberYardPrice;
-            this.SawmillPrice = Properties.Settings.Default.SawmillPrice;
-            this.ForestPrice = Properties.Settings.Default.ForestPrice;
-            this.ShipmentPrice = Properties.Settings.Default.ShipmentPrice;
-            this.AlchemyPrice = Properties.Settings.Default.AlchemyPrice;
-            this.PortalPrice = Properties.Settings.Default.PortalPrice;
-            this.ExtractorPrice = Properties.Settings.Default.ExtractorPrice;
-            this.CondenserPrice = Properties.Settings.Default.CondenserPrice;
         }
         #endregion
 
@@ -654,17 +659,22 @@ namespace Tree_Logger_CSharp
                 Properties.Settings.Default.Portal = 0;
                 Properties.Settings.Default.Extractor = 0;
                 Properties.Settings.Default.Condenser = 0;
-                Properties.Settings.Default.ClickerPrice = 15;
-                Properties.Settings.Default.LumberjackPrice = 100;
-                Properties.Settings.Default.LumberYardPrice = 500;
-                Properties.Settings.Default.SawmillPrice = 3000;
-                Properties.Settings.Default.ForestPrice = 10000;
-                Properties.Settings.Default.ShipmentPrice = 40000;
-                Properties.Settings.Default.AlchemyPrice = 200000;
-                Properties.Settings.Default.PortalPrice = 1666666;
-                Properties.Settings.Default.ExtractorPrice = 123456789;
-                Properties.Settings.Default.CondenserPrice = 3999999999;
                 Properties.Settings.Default.Save();
+
+                loadGame();
+
+                this.ClickerPrice = 15;
+                this.LumberjackPrice = 100;
+                this.LumberYardPrice = 500;
+                this.SawmillPrice = 3000;
+                this.ForestPrice = 10000;
+                this.ShipmentPrice = 40000;
+                this.AlchemyPrice = 200000;
+                this.PortalPrice = 1666666;
+                this.ExtractorPrice = 123456789;
+                this.CondenserPrice = 3999999999;
+
+                recalculateAll();
         }
 #endregion
 

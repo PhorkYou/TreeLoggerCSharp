@@ -44,36 +44,6 @@
     <Setting Name="Extractor" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ClickerPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">15</Value>
-    </Setting>
-    <Setting Name="LumberjackPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">100</Value>
-    </Setting>
-    <Setting Name="LumberYardPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">500</Value>
-    </Setting>
-    <Setting Name="SawmillPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">3000</Value>
-    </Setting>
-    <Setting Name="ForestPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">10000</Value>
-    </Setting>
-    <Setting Name="ShipmentPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">40000</Value>
-    </Setting>
-    <Setting Name="AlchemyPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">100000</Value>
-    </Setting>
-    <Setting Name="PortalPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1666666</Value>
-    </Setting>
-    <Setting Name="ExtractorPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">123456789</Value>
-    </Setting>
-    <Setting Name="CondenserPrice" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">3999999999</Value>
-    </Setting>
     <Setting Name="Condenser" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
